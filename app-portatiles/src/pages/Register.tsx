@@ -1,99 +1,96 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-const apiUrl = import.meta.env.VITE_API_URL;  
+import Spline from "@splinetool/react-spline";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { ReactSVG } from "react-svg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const apiUrl = import.meta.env.VITE_API_URL;
 
-const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Login = ({ setIsAuthenticated }) => {
+  // const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage('');
-    setLoading(true); 
+    setErrorMessage("");
+    setLoading(true);
     try {
-      const response = await fetch(`${apiUrl}/auth/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre: name, email, password }),
+      const response = await fetch(`${apiUrl}/auth/register/send-code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      if (response.ok){
-        navigate('/');
-      }else{
-        /* console.error('Error en el registro'); */
-        toast.error(data.message, { autoClose: 7000 });
-        setErrorMessage(data.error[0]);
-      } 
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userName", data.user.nombre);
+        setIsAuthenticated(true);
+      } else {
+        console.error("Error en inicio de sesión", data); 
+        // toast.error(data.data, { autoClose: 7000 });
+        setErrorMessage(data.data[0]);
+      }
     } catch (error) {
-      setErrorMessage('Error de conexión. Inténtalo nuevamente.');
+      console.error('Error de conexión', error); 
+      toast.error("Error de conexión", { autoClose: 5000 });
+      // setErrorMessage("Error de conexión. Inténtalo nuevamente.");
     } finally {
       setLoading(false);
     }
   };
 
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <ToastContainer/>
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-3xl shadow-lg">
-        <h2 className="text-2xl font-semibold text-center text-gray-800">Crear Cuenta</h2>
-        <form className="mt-4" onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-800 px-2 pb-1">Nombres</label>
-            <input
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              type="text"
-              required
-              className="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              placeholder="juan perez"
-            />
+    <div className="flex flex-row-reverse justify-center xl:justify-around xl:pl-40 items-center bg-gray-100 min-h-screen ">
+      <ToastContainer />
+        <ReactSVG className="hidden xl:block " src="man.svg" />
+        <ReactSVG className="hidden xl:block " src="woman.svg" />
+
+        <div className="p-10 rounded shadow-lg">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div>
+          <h3 className="text-left text-gray-500">
+            Bienvenido!
+          </h3>
+          <h2 className="font-semibold mt-2 text-2xl">
+            Registrarse
+          </h2>
+          <span className="text-sm"> Ya estas un pasó más cerca.</span>
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-800 px-2 pb-1">E-mail</label>
+          <div className="relative group mt-6">
             <input
-              type="email"
               onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              type="email"
+              className="bg-gray-200 rounded-lg p-2 w-full outline-primary  peer"
+              placeholder=""
               required
-              className="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              placeholder="email@example.com"
-            />
+            ></input>
+            <label className="absolute py-2 h-full left-2 pointer-events-none text-gray-400 group-focus-within:text-black group-focus-within:-translate-y-full peer-[:not(:placeholder-shown)]:-translate-y-full duration-500">
+              Correo
+            </label>
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-800 px-2 pb-1">Contraseña</label>
-            <input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
-              className="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              placeholder="********"
-            />
-          </div>
-          {errorMessage && <p className="my-2  text-red-600">{errorMessage}</p>}
+          {errorMessage && <p className="text-error">{errorMessage}</p>}
           <button
             type="submit"
-            className="w-full px-4 py-2 mt-2 text-white bg-indigo-500 rounded-xl hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50 transition-all duration-300 ease-in-out"
+            className="self-center text-white bg-primary rounded hover:bg-primary-dark font-semibold w-full py-2 mt-2"
             disabled={loading}
           >
-            {loading ? 'Cargando...' : 'Registrarse'}
+            {" "}
+            {loading ? "Cargando..." : "Registrarse"}
           </button>
+          <p className="">
+            ¿Ya tienes una cuenta?{" "}
+            <a href="/login" className="text-primary hover:underline">
+              Iniciar sesión
+            </a>
+          </p>
         </form>
-        <p className="mt-4 text-center text-gray-600">
-          ¿Ya tienes cuenta?{' '}
-          <Link to="/" className="text-blue-600 hover:underline">
-            Inicia Sesión
-          </Link>
-        </p>
       </div>
     </div>
   );
 };
 
-export default Register;
+export default Login;
