@@ -18,7 +18,7 @@ export default function Navbar({ onLogout, items }) {
           {/* Left - Brand */}
           <div className="flex items-center">
             <Target className="w-6 h-6 text-indigo-600" />
-            <span className="ml-2 text-xl font-bold text-gray-800">TaskMaster</span>
+            <span className="ml-2 text-xl font-bold text-gray-800">Portatiles Unimag</span>
           </div>
 
           {/* Center - Navigation (Desktop) */}
