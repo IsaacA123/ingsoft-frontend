@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Recovery from './pages/RecoveryPass';
-import MyCalendar from './pages/Calendar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import LaptopList from './pages/LaptopList';
 import ProtectedRoutes from './components/ProtectedRoutes';
@@ -12,11 +11,6 @@ import { ToastContainer } from 'react-toastify';
 import ReservationPage from './components/ReservationPage';
 import ReservationsList from './pages/ReservationsList';
 import FinesList from './pages/FineList';
-// import Dashboard from './pages/Dashboard';
-// import NotFound from './pages/NotFound';
-// import ProtectedRoutes from './components/ProtectedRoutes';
-// import Projects from './components/ProjectsView';
-// import TasksView from './components/TasksView';
 
 const theme = createTheme({
   palette: {
