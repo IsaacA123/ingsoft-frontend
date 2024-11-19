@@ -10,7 +10,7 @@ export default {
         primary: {
           ligth:'#9f9',
           DEFAULT:'#776dff',
-          dark:'#060',
+          dark:'#',
         },
         secondary: {
           light: '#333',
