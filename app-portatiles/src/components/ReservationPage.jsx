@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { format, isPast } from 'date-fns';
+import { format, isPast, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -33,7 +33,7 @@ const ReservationPage = () => {
     for (let hour = MIN_HOUR; hour <= MAX_HOUR; hour++) {
       const formattedHour = hour.toString().padStart(2, '0');
       options.push(`${formattedHour}:00`);
-      if (hour < MAX_HOUR) { // No agregar :30 para la última hora
+      if (hour < MAX_HOUR) { 
         options.push(`${formattedHour}:30`);
       }
     }
@@ -83,9 +83,17 @@ const ReservationPage = () => {
   const checkTimeConflict = (selectedDate, start, end) => {
     return reservedList.some(reservation => {
       if (reservation.Date.split("T")[0] !== selectedDate) return false;
-      
+      const formatTime = (time) => {
+        if (time.length === 5) {
+          return time + ':00'; 
+        }
+        return time;
+      };
+      start = formatTime(start);
+      end = formatTime(end);
       const reservationStart = reservation.startTime;
       const reservationEnd = reservation.endTime;
+      console.log(start, end, reservationStart, reservationEnd);
       
       return (start >= reservationStart && start < reservationEnd) ||
              (end > reservationStart && end <= reservationEnd) ||
@@ -310,7 +318,7 @@ const ReservationPage = () => {
             {reservationDate && (
               <div className="mb-6 p-4 bg-gray-50 rounded-lg">
                 <Typography variant="h6" className="mb-3 text-gray-800">
-                  Reservas para el día {format(new Date(reservationDate), "d 'de' MMMM 'de' yyyy", { locale: es })}
+                  Reservas para el día {format(parseISO(reservationDate), "d 'de' MMMM 'de' yyyy", { locale: es })}
                 </Typography>
     
                 {dailyReservations.length > 0 ? (

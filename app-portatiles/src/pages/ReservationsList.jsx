@@ -104,6 +104,10 @@ const ReservationsList = () => {
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <header className="mb-8">
+        <h1 className="text-2xl font-bold text-gray-800">Mis Reservas</h1>
+        <p className="text-gray-600">Lista de todas tus reservas próximas.</p>
+      </header>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -142,18 +146,22 @@ const ReservationsList = () => {
                   )}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {format(
-                    new Date(`1970-01-01T${reservation.start_time}Z`),
-                    "h:mm a",
-                    { locale: es }
-                  )}
+                  {new Date(
+                    `1970-01-01T${reservation.start_time}`
+                  ).toLocaleString("es-ES", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  })}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {format(
-                    new Date(`1970-01-01T${reservation.end_time}Z`),
-                    "h:mm a",
-                    { locale: es }
-                  )}
+                  {new Date(
+                    `1970-01-01T${reservation.end_time}`
+                  ).toLocaleString("es-ES", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  })}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {reservation.serial}

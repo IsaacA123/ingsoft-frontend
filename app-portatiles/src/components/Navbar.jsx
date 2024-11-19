@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Target, Menu, X, LogOut } from 'lucide-react';
-import { Link, To, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar({ onLogout, items }) {
   const userName = localStorage.getItem('userName') || 'Usuario';

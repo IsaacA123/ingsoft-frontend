@@ -63,13 +63,22 @@ const FinesList = () => {
         <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
           <div className="flex">
             <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              <svg
+                className="h-5 w-5 text-red-400"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clipRule="evenodd"
+                />
               </svg>
             </div>
             <div className="ml-3">
               <p className="text-sm text-red-700">
-                Tienes multas activas. No podrás realizar reservas de portátiles hasta que estas expiren.
+                Tienes multas activas. No podrás realizar reservas de portátiles
+                hasta que estas expiren.
               </p>
             </div>
           </div>
@@ -78,12 +87,12 @@ const FinesList = () => {
 
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="sm:flex sm:items-center p-6 bg-gray-50">
-          <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Mis Multas</h1>
-            <p className="mt-2 text-sm text-gray-700">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold text-gray-800">Mis Multas</h1>
+            <p className="text-gray-600">
               Lista de todas tus multas y sus fechas de expiración.
             </p>
-          </div>
+          </header>
         </div>
 
         <div className="overflow-x-auto">
@@ -108,7 +117,7 @@ const FinesList = () => {
               {fines.map((fine) => {
                 const isExpired = isPast(new Date(fine.end_date));
                 return (
-                  <tr 
+                  <tr
                     key={fine.id}
                     className="hover:bg-gray-50 transition-colors duration-200"
                   >
@@ -119,7 +128,11 @@ const FinesList = () => {
                       {fine.description}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {format(new Date(fine.end_date), "d 'de' MMMM 'de' yyyy", { locale: es })}
+                      {format(
+                        new Date(fine.end_date),
+                        "d 'de' MMMM 'de' yyyy",
+                        { locale: es }
+                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
@@ -155,8 +168,12 @@ const FinesList = () => {
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <h3 className="mt-2 text-sm font-medium text-gray-900">No tienes multas</h3>
-            <p className="mt-1 text-sm text-gray-500">¡Excelente! Mantén el buen comportamiento.</p>
+            <h3 className="mt-2 text-sm font-medium text-gray-900">
+              No tienes multas
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">
+              ¡Excelente! Mantén el buen comportamiento.
+            </p>
           </div>
         )}
       </div>
