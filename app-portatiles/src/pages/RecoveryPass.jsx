@@ -21,14 +21,85 @@ const Recovery = ({ setIsAuthenticated }) => {
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
 
+  const handleSendCode = () => {
+    try {
+      const response = await fetch(`${apiUrl}/auth/recovery/send-csode`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+  
+      if (response.ok) {
+        nextStep();
+      } else {
+        setErrorMessage(data.data || "Error en el envio del codigo.");
+      }
+    } catch (error) {
+      toast.error("Error de conexión", { autoClose: 5000 });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleVerifyCode = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/auth/verify-code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, code }),
+      });
+      const data = await response.json();
+  
+      if (response.ok) {
+        nextStep();
+      } else {
+        setErrorMessage(data.data || "Error en la verificación del código.");
+      }
+    } catch (error) {
+      toast.error("Error de conexión", { autoClose: 5000 });
+    } finally {
+      setLoading(false);
+    }
+  }
+  const handleResetPassword = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/auth/recovery/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, code }),
+      });
+      const data = await response.json();
+  
+      if (response.ok) {
+        nextStep();
+      } else {
+        setErrorMessage(data.data || "Error en la verificación del código.");
+      }
+    } catch (error) {
+      toast.error("Error de conexión", { autoClose: 5000 });
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const handleSubmit = () => {
-    nextStep();
+    if(step===1) {
+      handleSendCode();
+    } else if(step===2) {
+      handleVerifyCode();
+    } else if(step===3) {
+      handleResetPassword();
+    } else {
+      nextStep();
+    }
     return;
   };
 
   const handleCancel = () => {
-    console.log("PASO PREVIO",step)
-    if(step===1) navigate("/login")
+    if(step===1) {
+      navigate("/login")
+    }
     prevStep();
     return;
   };
@@ -111,17 +182,12 @@ const Recovery = ({ setIsAuthenticated }) => {
                     Tu contraseña se ha cambiado!
                   </h2>
                   <p className="text-sm">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Nos alegramos de que hayas recuperado tu contraseña. Ahora puedes iniciar sesión en tu cuenta.
                   </p>
                 </div>
 
-                <button
-                  type="button"
-                  className="self-center text-white bg-primary rounded hover:bg-primary-dark font-semibold w-full py-2 mt-4"
-                  disabled={loading}
-                >
-                  Continuar
-                </button>
+                <Button onClick={navigate("/login")} variant="contained" >Continuar</Button>
+
               </form>
             </motion.div>
             <motion.div key="woman" layout>

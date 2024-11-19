@@ -44,7 +44,7 @@ const Register = () => {
     }
   }
 
-  const handleCheckCode = async () => {
+  const handleVerifyCode = async () => {
     try {
       const response = await fetch(`${apiUrl}/auth/verify-code`, {
         method: "POST",
@@ -90,11 +90,11 @@ const Register = () => {
     if(step === 1) {
       handleSendCode();
     } else if(step === 2) {
-      handleCheckCode();
+      handleVerifyCode();
     } else if(step === 3) {
       handleRegister();
     } else {
-      navigate("/login");
+      nextStep();
     }
     return;
   };
@@ -183,11 +183,11 @@ const Register = () => {
                       Te has registrado con éxito!
                     </h2>
                     <p className="text-sm">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Ya puedes iniciar sesión en tu cuenta.
                     </p>
                   </div>
 
-                  <Button variant="contained" >Continuar</Button>
+                  <Button onClick={navigate("/login")} variant="contained" >Continuar</Button>
 
                 </form>
               </motion.div>

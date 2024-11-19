@@ -93,7 +93,6 @@ const ReservationPage = () => {
       end = formatTime(end);
       const reservationStart = reservation.startTime;
       const reservationEnd = reservation.endTime;
-      console.log(start, end, reservationStart, reservationEnd);
       
       return (start >= reservationStart && start < reservationEnd) ||
              (end > reservationStart && end <= reservationEnd) ||
@@ -228,7 +227,6 @@ const ReservationPage = () => {
       toast.success("Reserva realizada con éxito.");
       navigate("/reservations");
     } catch (error) {      
-      console.log(error);
       setDateError(error.message)
     }
   };

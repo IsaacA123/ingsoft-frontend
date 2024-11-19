@@ -30,8 +30,6 @@ const LaptopList = () => {
         return;
       }
 
-      console.log(token);
-
       const response = await fetch(`${apiUrl}/laptops`, {
         method: "GET",
         headers: {
@@ -40,7 +38,6 @@ const LaptopList = () => {
         },
       });
       const data = await response.json();
-      console.log(data);
 
       if (response.ok) {
         setLaptops(data.data);

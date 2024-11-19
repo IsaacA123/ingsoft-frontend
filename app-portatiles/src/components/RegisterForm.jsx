@@ -56,7 +56,6 @@ function RegisterForm({ errorMessage, onSubmit, email, code, setPassword: setPas
         }
       )
       .then(function (response) {
-        console.log(response.data);
         Navigate("/login");
       })
       .catch(function (error) {
