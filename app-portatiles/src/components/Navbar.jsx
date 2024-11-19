@@ -24,7 +24,7 @@ export default function Navbar({ onLogout, items }) {
           {/* Center - Navigation (Desktop) */}
           <div className="hidden md:flex items-center justify-center flex-1">
             <div className="flex space-x-4">
-              {items.map((item: { icon: any; path: To; id: React.Key | null | undefined; label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
+              {items.map((item) => {
                 const Icon = item.icon;
                 
                 // Determina si este item está activo comparando la ruta actual
@@ -80,7 +80,7 @@ export default function Navbar({ onLogout, items }) {
         {isMobileMenuOpen && (
           <div className="md:hidden flex flex-col">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {items.map((item: { icon: any; path: To; id: React.Key | null | undefined; label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
+              {items.map((item) => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path;
 
