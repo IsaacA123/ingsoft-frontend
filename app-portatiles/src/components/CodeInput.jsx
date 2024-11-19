@@ -1,6 +1,6 @@
 import React, {  useRef } from 'react';
 
-function CodeInput(setCode) {
+function CodeInput({setCode}) {
   const [code, setLocalCode] = React.useState(["", "", "", ""]);
   const inputsRef = useRef([]);
 
