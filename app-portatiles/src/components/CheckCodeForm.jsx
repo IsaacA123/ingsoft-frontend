@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CodeInput from "./codeInput";
+import CodeInput from "./CodeInput";
 import { Button } from "@mui/material";
 
 function CheckCodeForm({ errorMessage, onSubmit, onCancel, email, setCode }) {
