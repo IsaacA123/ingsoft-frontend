@@ -142,6 +142,7 @@ const Recovery = ({ setIsAuthenticated }) => {
             <motion.div key="form" layout>
               <CheckCodeForm
                 errorMessage={errorMessage}
+                setCode={setCode}
                 onSubmit={handleSubmit}
                 onCancel={handleCancel}
                 email={email}

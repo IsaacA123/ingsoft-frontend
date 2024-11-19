@@ -1,10 +1,17 @@
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 const apiUrl = import.meta.env.VITE_API_URL;
 
-function RegisterForm({ errorMessage, onSubmit, email, code, setPassword: setPasswordFromProps , title }) {
-  const [password, setPassword] = useState(""); 
+function RegisterForm({
+  errorMessage,
+  onSubmit,
+  email,
+  code,
+  setPassword: setPasswordFromProps,
+  title,
+}) {
+  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -12,8 +19,8 @@ function RegisterForm({ errorMessage, onSubmit, email, code, setPassword: setPas
 
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
-    setPassword(newPassword); 
-    setPasswordFromProps(newPassword)
+    setPassword(newPassword);
+    setPasswordFromProps(newPassword);
     if (newPassword !== confirmPassword && newPassword && confirmPassword) {
       setPasswordsMatch(false);
       setLocalErrorMessage("Las contraseñas no coinciden.");
@@ -103,13 +110,9 @@ function RegisterForm({ errorMessage, onSubmit, email, code, setPassword: setPas
       />
       {errorMessage && <p className="text-error">{errorMessage}</p>}
       {localErrorMessage && <p className="text-error">{localErrorMessage}</p>}
-      <button
-        type="submit"
-        className="self-center text-white bg-primary rounded hover:bg-primary-dark font-semibold w-full py-2 mt-2"
-        disabled={loading}
-      >
+      <Button type="submit" variant="contained" disabled={loading}>
         {loading ? "Cargando..." : "Registrarse"}
-      </button>
+      </Button>
     </form>
   );
 }
