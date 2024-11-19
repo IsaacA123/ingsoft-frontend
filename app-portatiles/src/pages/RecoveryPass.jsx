@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { ReactSVG } from "react-svg";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { motion, AnimatePresence } from "framer-motion";
-import SendCodeForm from "../components/sendCodeForm";
 import CheckCodeForm from "../components/CheckCodeForm";
 import RegisterForm from "../components/RegisterForm";
 import RecoverPassForm from "../components/recoverPassForm";
 import { useNavigate } from "react-router-dom";
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Recovery = ({ setIsAuthenticated }) => {
   const [step, setStep] = useState(1); 
