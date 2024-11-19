@@ -25,7 +25,7 @@ const Register = () => {
 
   const handleSendCode = async () => {
     try {
-      const response = await fetch(`${apiUrl}/auth/register/send-csode`, {
+      const response = await fetch(`${apiUrl}/auth/register/send-code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
