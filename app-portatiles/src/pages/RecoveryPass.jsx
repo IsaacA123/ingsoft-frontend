@@ -7,6 +7,7 @@ import CheckCodeForm from "../components/CheckCodeForm";
 import RegisterForm from "../components/RegisterForm";
 import RecoverPassForm from "../components/recoverPassForm";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -121,6 +122,7 @@ const Recovery = ({ setIsAuthenticated }) => {
               animate={{ x: 0 }}
             >
               <RecoverPassForm
+                errorMessage={errorMessage}
                 onSubmit={handleSubmit}
                 onCancel={handleCancel}
                 setEmail={setEmail}
@@ -139,6 +141,7 @@ const Recovery = ({ setIsAuthenticated }) => {
             </motion.div>
             <motion.div key="form" layout>
               <CheckCodeForm
+                errorMessage={errorMessage}
                 onSubmit={handleSubmit}
                 onCancel={handleCancel}
                 email={email}
@@ -152,6 +155,7 @@ const Recovery = ({ setIsAuthenticated }) => {
           <div className="flex flex-row-reverse justify-center  items-center bg-gray-100 min-h-screen ">
             <motion.div key="form" layout>
               <RegisterForm
+                errorMessage={errorMessage}
                 onSubmit={handleSubmit}
                 email={email}
                 code={code}

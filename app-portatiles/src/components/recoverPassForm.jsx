@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-function RecoverPassForm({ onSubmit, onCancel, setEmail }) {
+function RecoverPassForm({ errorMessage, onSubmit, onCancel, setEmail }) {
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
