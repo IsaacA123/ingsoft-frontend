@@ -24,7 +24,7 @@ const Recovery = ({ setIsAuthenticated }) => {
 
   const handleSendCode = async () => {
     try {
-      const response = await fetch(`${apiUrl}/auth/recovery/send-csode`, {
+      const response = await fetch(`${apiUrl}/auth/recovery/send-code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
