@@ -35,7 +35,7 @@ const Login = ({ setIsAuthenticated }) => {
           localStorage.setItem("userName", data.data.email);
           localStorage.setItem("rol", userRole);
           setIsAuthenticated(true);
-          navigate("/dashboard");  // Redirigir al dashboard o vista principal para estudiantes
+          navigate("/laptops");  // Redirigir al dashboard o vista principal para estudiantes
         } else {
           // Mostrar mensaje de error con el rol del usuario
           toast.error(`Esta vista es solo para estudiantes. Tu rol es: ${userRole}`, { autoClose: 5000 });
