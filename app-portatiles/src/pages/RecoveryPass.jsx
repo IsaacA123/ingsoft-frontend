@@ -21,7 +21,7 @@ const Recovery = ({ setIsAuthenticated }) => {
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
 
-  const handleSendCode = () => {
+  const handleSendCode = async () => {
     try {
       const response = await fetch(`${apiUrl}/auth/recovery/send-csode`, {
         method: "POST",
