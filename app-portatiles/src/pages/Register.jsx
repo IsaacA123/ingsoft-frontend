@@ -33,6 +33,7 @@ const Register = () => {
       const data = await response.json();
   
       if (response.ok) {
+        setErrorMessage("")
         nextStep();
       } else {
         setErrorMessage(data.data || "Error en el envio del codigo.");
@@ -54,6 +55,7 @@ const Register = () => {
       const data = await response.json();
   
       if (response.ok) {
+        setErrorMessage("")
         nextStep();
       } else {
         setErrorMessage(data.data || "Error en la verificación del código.");
@@ -75,6 +77,7 @@ const Register = () => {
       const data = await response.json();
   
       if (response.ok) {
+        setErrorMessage("")
         nextStep();
       } else {
         setErrorMessage(data.data || "Error en el registro.");

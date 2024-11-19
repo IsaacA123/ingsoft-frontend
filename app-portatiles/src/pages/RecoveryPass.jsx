@@ -33,6 +33,7 @@ const Recovery = ({ setIsAuthenticated }) => {
       const data = await response.json();
   
       if (response.ok) {
+        setErrorMessage("")
         nextStep();
       } else {
         setErrorMessage(data.data || "Error en el envio del codigo.");
@@ -54,6 +55,7 @@ const Recovery = ({ setIsAuthenticated }) => {
       const data = await response.json();
   
       if (response.ok) {
+        setErrorMessage("")
         nextStep();
       } else {
         setErrorMessage(data.data || "Error en la verificación del código.");
@@ -74,6 +76,7 @@ const Recovery = ({ setIsAuthenticated }) => {
       const data = await response.json();
   
       if (response.ok) {
+        setErrorMessage("")
         nextStep();
       } else {
         setErrorMessage(data.data || "Error en la verificación del código.");
@@ -82,6 +85,7 @@ const Recovery = ({ setIsAuthenticated }) => {
       toast.error("Error de conexión", { autoClose: 5000 });
     } finally {
       setLoading(false);
+      
     }
   }
 
